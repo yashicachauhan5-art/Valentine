@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14 Reasons Why I Love You 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:radial-gradient(circle at top,#ffd9e6,#ffb6cc);
+  font-family:"Poppins",sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* ✨ title */
+h1{
+  font-family:"Great Vibes",cursive;
+  font-size:48px;
+  color:#d6336c;
+  margin:40px 0 20px;
+  text-shadow:0 0 20px rgba(255,105,160,0.6);
+}
+
+/* ⭐ floating stars */
+.star{
+  position:fixed;
+  width:4px;
+  height:4px;
+  background:white;
+  border-radius:50%;
+  opacity:0.7;
+  animation:floatStar linear infinite;
+}
+
+@keyframes floatStar{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+/* 🦋 butterfly */
+.butterfly{
+  position:fixed;
+  font-size:20px;
+  animation:fly 1.4s ease forwards;
+  pointer-events:none;
+}
+
+@keyframes fly{
+  0%{transform:translateY(0) scale(0.6);opacity:1;}
+  100%{transform:translateY(-120px) scale(1.4);opacity:0;}
+}
+
+/* 💌 grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:18px;
+  width:90%;
+  max-width:700px;
+  margin-bottom:60px;
+}
+
+/* 🃏 flip card */
+.card{
+  perspective:1000px;
+}
+
+.inner{
+  width:100%;
+  height:160px;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.8s;
+}
+
+.card.flipped .inner{
+  transform:rotateY(180deg);
+}
+
+.face{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  text-align:center;
+  backface-visibility:hidden;
+  box-shadow:0 8px 25px rgba(255,105,135,0.25);
+}
+
+/* front */
+.front{
+  background:rgba(255,255,255,0.7);
+  font-family:"Great Vibes",cursive;
+  font-size:22px;
+  color:#d6336c;
+}
+
+/* back */
+.back{
+  background:white;
+  transform:rotateY(180deg);
+  font-size:13px;
+  color:#6b2b3a;
+  line-height:1.4;
+}
+
+/* 🌟 prettier glowing button (CHANGE #2) */
+.next{
+  margin-bottom:60px;
+  padding:16px 40px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,#ff6fa3,#ff4d88,#ff85b5);
+  background-size:200% 200%;
+  color:white;
+  font-size:18px;
+  font-family:"Great Vibes",cursive;
+  cursor:pointer;
+  box-shadow:
+    0 0 18px rgba(255,77,136,0.7),
+    0 0 35px rgba(255,105,160,0.5);
+  animation:glowMove 4s ease infinite, pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glowMove{
+  0%,100%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+}
+</style>
+</head>
+
+<body>
+
+<h1>14 Reasons Why I Love You</h1>
+
+<div class="grid" id="grid"></div>
+
+<button class="next" onclick="location.href='game.html'">
+How bout a game? 💗
+</button>
+
+<script>
+/* ⭐ stars */
+for(let i=0;i<40;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(6+Math.random()*6)+"s";
+  document.body.appendChild(s);
+}
+
+/* 💌 messages */
+const reasons=[
+"I love you because you're the most prettiest human my eyes have ever witnessed.",
+"I love you because the way you make me feel safe and comfortable.",
+"I love you because the way i can talk about anything with you without the fear of being judged.",
+"I love you because you make my day better just by being yourself.",
+"I love you because you never pretend, you're always true to me.",
+"I love you because you're really, really ambitious and serious about life.",
+"I love you because you know how to handle situations and how to deal with people.",
+"I love you because with you there's no scope of downfall, its always go with love, grow with love.",
+"I love you because you always know how to make me smile.",
+"I love you because you never step back from showering me with love.",
+"I love you because you care, you literally care.",
+"I love you because we're just the same person with different fonts.",
+"I love you because you're always there for me no matter what.",
+"No number of reasons can bind my love for you, i love you because you are you and you are perfect just the way you are."
+];
+
+/* 🃏 create cards */
+const grid=document.getElementById("grid");
+
+reasons.forEach((text,i)=>{
+  let card=document.createElement("div");
+  card.className="card";
+
+  card.innerHTML=`
+    <div class="inner">
+      <div class="face front">Tap 💗</div>
+      <div class="face back">${text}</div>
+    </div>
+  `;
+
+  card.onclick=()=>{
+    card.classList.toggle("flipped");
+
+    /* 🦋 BUTTERFLIES FLOOD SCREEN (CHANGE #1) */
+    for(let b=0;b<25;b++){
+      let bf=document.createElement("div");
+      bf.className="butterfly";
+      bf.innerHTML="🦋";
+      bf.style.left=Math.random()*100+"vw";
+      bf.style.top=Math.random()*100+"vh";
+      document.body.appendChild(bf);
+      setTimeout(()=>bf.remove(),1400);
+    }
+  };
+
+  grid.appendChild(card);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Valentine Final</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    height:100vh;
+    background:radial-gradient(circle at top,#ffd9e6,#ffb6cc);
+    overflow:hidden;
+    font-family:"Great Vibes",cursive;
+    position:relative;
+  }
+
+  /* Floating sparkles */
+  .sparkle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:radial-gradient(circle,#fff,#ffd6e7);
+    border-radius:50%;
+    opacity:0.7;
+    animation:float 6s linear infinite;
+  }
+  @keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
+  }
+
+  /* Kisses */
+  .kiss{
+    position:absolute;
+    font-size:28px;
+    opacity:0;
+    pointer-events:none;
+    animation:kissPop 1s ease forwards;
+  }
+  @keyframes kissPop{
+    0%{transform:scale(0.3) rotate(0deg); opacity:1;}
+    50%{transform:scale(1.2) rotate(15deg); opacity:1;}
+    100%{transform:scale(0.8) rotate(-15deg); opacity:0;}
+  }
+
+  /* Munchkin text */
+  .munchkin-text{
+    position:absolute;
+    top:40%;
+    width:100%;
+    text-align:center;
+    font-size:36px;
+    color:#ff4d88;
+    text-shadow:0 0 12px #ffb6cc,0 0 25px #ff4d88;
+    opacity:0;
+    pointer-events:none;
+    animation:munchkinFade 1.5s ease forwards;
+    animation-delay:0.5s;
+  }
+  @keyframes munchkinFade{
+    to{opacity:1;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Munchkin text -->
+<div class="munchkin-text" id="munchkinText">you’ll forever be my munchkin 💖</div>
+
+<!-- Audio -->
+<audio id="bgMusic" src="valentine.mp3" autoplay></audio>
+
+<script>
+  // Floating sparkles
+  for(let i=0;i<25;i++){
+    let s = document.createElement("div");
+    s.className="sparkle";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(5+Math.random()*5)+"s";
+    s.style.width=(4+Math.random()*6)+"px";
+    s.style.height=(4+Math.random()*6)+"px";
+    document.body.appendChild(s);
+  }
+
+  const body = document.body;
+  const munchkinText = document.getElementById("munchkinText");
+
+  // Flag to show text on first touch
+  let textShown = false;
+
+  body.addEventListener("touchmove", (e)=>{
+    if(!textShown){
+      munchkinText.style.opacity = 1;
+      textShown = true;
+    }
+
+    // Create kisses at touch points
+    for(let touch of e.touches){
+      let kiss = document.createElement("div");
+      kiss.className="kiss";
+      kiss.innerText="💋";
+      kiss.style.left = (touch.clientX - 14) + "px";
+      kiss.style.top = (touch.clientY - 14) + "px";
+      kiss.style.color = `hsl(${Math.random()*360}, 80%, 60%)`; // rainbow glow
+      kiss.style.textShadow = `0 0 8px #fff,0 0 20px hsl(${Math.random()*360}, 80%, 60%)`;
+      document.body.appendChild(kiss);
+      setTimeout(()=>kiss.remove(),1000);
+    }
+  });
+
+  // Optional: allow mouse movement for desktop preview
+  body.addEventListener("mousemove", (e)=>{
+    if(!textShown){
+      munchkinText.style.opacity = 1;
+      textShown = true;
+    }
+
+    let kiss = document.createElement("div");
+    kiss.className="kiss";
+    kiss.innerText="💋";
+    kiss.style.left = (e.clientX - 14) + "px";
+    kiss.style.top = (e.clientY - 14) + "px";
+    kiss.style.color = `hsl(${Math.random()*360}, 80%, 60%)`;
+    kiss.style.textShadow = `0 0 8px #fff,0 0 20px hsl(${Math.random()*360}, 80%, 60%)`;
+    document.body.appendChild(kiss);
+    setTimeout(()=>kiss.remove(),1000);
+  });
+
+  // Background music control
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.6;
+  music.play();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Valentine</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    height:100vh;
+    background:radial-gradient(circle at top,#ffd9e6,#ffb6cc);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-family:"Poppins",sans-serif;
+    overflow-x:hidden;
+  }
+
+  /* Cake */
+  .cake-container{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .cake{
+    width:280px;
+    opacity:0;
+    animation:riseCake 2s ease forwards;
+  }
+  @keyframes riseCake{
+    to{opacity:1;}
+  }
+
+  /* Candle */
+  .candle{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:14px;
+    height:35px;
+    border-radius:7px;
+    background: radial-gradient(circle at top, #ffdf7d, #ffa500);
+    box-shadow: 0 0 10px #ffdf7d, 0 0 20px #ffdf7d;
+    animation: flicker 0.15s infinite alternate;
+    cursor:pointer;
+    z-index:2;
+  }
+  @keyframes flicker{
+    0% { transform:translateX(-50%) scaleY(1); opacity:1; }
+    50% { transform:translateX(-50%) scaleY(0.85); opacity:0.9; }
+    100% { transform:translateX(-50%) scaleY(1); opacity:1; }
+  }
+  .candle.blow{
+    animation:none;
+    opacity:0;
+    transform:translateX(-50%) scaleY(0);
+    box-shadow:none;
+    transition: all 1s ease-out;
+  }
+
+  /* Sparkle puff */
+  .sparkle-puff{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background: radial-gradient(circle, #fffacd,#ffd700);
+    border-radius:50%;
+    opacity:1;
+    pointer-events:none;
+    animation: puff 1s ease forwards;
+  }
+  @keyframes puff{
+    0%{transform:translate(0,0) scale(0.5); opacity:1;}
+    50%{transform:translate(calc(-20px + 40px*var(--randx)), calc(-50px + -30px*var(--randy))) scale(1); opacity:0.8;}
+    100%{transform:translate(calc(-40px + 80px*var(--randx)), calc(-100px + -60px*var(--randy))) scale(0.2); opacity:0;}
+  }
+
+  /* Texts */
+  .cake-text{
+    text-align:center;
+    margin-top:20px;
+    font-family:"Great Vibes",cursive;
+    font-size:28px;
+    color:#ff4d88;
+    animation:textFade 2s ease forwards;
+  }
+  .cake-subtext{
+    text-align:center;
+    margin-top:10px;
+    font-family:"Great Vibes",cursive;
+    font-size:24px;
+    color:#ff4d88;
+    animation:textFade 2s ease forwards;
+    animation-delay:1s;
+  }
+  @keyframes textFade{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* Next button */
+  .next-btn{
+    margin-top:30px;
+    padding:14px 28px;
+    border:none;
+    border-radius:40px;
+    background:linear-gradient(45deg,#ff5aa4,#ff82b4);
+    color:white;
+    font-size:18px;
+    font-family:"Great Vibes",cursive;
+    cursor:pointer;
+    box-shadow:0 0 25px rgba(255,90,164,0.6);
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeBtn 1.5s ease forwards;
+    animation-delay:2.5s;
+  }
+  @keyframes fadeBtn{
+    to{opacity:1; transform:translateY(0);}
+  }
+
+</style>
+</head>
+<body>
+
+<div class="cake-container">
+  <img src="cake.png" alt="cake" class="cake"> <!-- PNG with transparent background -->
+  <div class="candle" id="candle"></div>
+</div>
+
+<div class="cake-text">Make a wish and blow the candle</div>
+<div class="cake-subtext">you’ll be my forever valentine</div>
+
+<button class="next-btn" onclick="location.href='final-surprise.html'">one last surprise →</button>
+
+<script>
+  const candle = document.getElementById("candle");
+
+  candle.addEventListener("click", () => {
+    // Blow the candle
+    candle.classList.add("blow");
+
+    // Sparkle puff effect
+    for(let i=0;i<15;i++){
+      let puff=document.createElement("div");
+      puff.className="sparkle-puff";
+      puff.style.setProperty('--randx', Math.random());
+      puff.style.setProperty('--randy', Math.random());
+      // Position the puff around the candle
+      puff.style.left = (candle.offsetLeft + 2 + Math.random()*10 - 5) + "px";
+      puff.style.top = candle.offsetTop + "px";
+      document.body.appendChild(puff);
+
+      // Remove after animation
+      setTimeout(()=>puff.remove(),1200);
+    }
+  });
+</script>
+
+</body>
+</html>

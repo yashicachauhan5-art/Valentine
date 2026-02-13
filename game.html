@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catch My Hearts 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  height:100vh;
+  overflow:hidden;
+  font-family:"Poppins",sans-serif;
+  background:radial-gradient(circle at top,#ffd9e6,#ffb6cc);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#finalLetter::-webkit-scrollbar{
+  width:6px;
+}
+#finalLetter::-webkit-scrollbar-thumb{
+  background:#ff9bb8;
+  border-radius:10px;
+}
+/* 💗 LOADING */
+#loading{
+  position:fixed;
+  inset:0;
+  background:#ffb6cc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  color:white;
+  font-family:"Great Vibes",cursive;
+  text-shadow:0 0 20px rgba(255,255,255,0.9);
+  z-index:10;
+}
+
+/* 📜 INSTRUCTIONS */
+#instructions{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9;
+}
+
+.instructionBox{
+  background:white;
+  padding:28px 36px;
+  border-radius:18px;
+  text-align:center;
+  box-shadow:0 0 30px rgba(255,105,135,0.5);
+}
+
+.instructionBox h2{
+  font-family:"Great Vibes",cursive;
+  color:#d6336c;
+  font-size:36px;
+}
+
+.startBtn{
+  margin-top:12px;
+  padding:10px 24px;
+  border:none;
+  border-radius:24px;
+  background:#ff4d88;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(255,77,136,0.8);
+}
+
+/* ⭐ SCORE */
+#score{
+  position:fixed;
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:18px;
+  color:#d6336c;
+  font-weight:500;
+  display:none;
+}
+
+/* 💗 HEARTS */
+.heart{
+  position:absolute;
+  font-size:28px;
+  cursor:pointer;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
+}
+
+/* 💬 CENTER MESSAGE */
+#miniMsg{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(255,255,255,0.95);
+  padding:16px 26px;
+  border-radius:18px;
+  box-shadow:0 0 30px rgba(255,105,135,0.6);
+  font-size:16px;
+  color:#6b2b3a;
+  opacity:0;
+  transition:opacity .4s;
+  text-align:center;
+}
+
+/* 🏆 WIN SCREEN */
+#winScreen{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top,#ffd9e6,#ffb6cc);
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+#winScreen h1{
+  font-family:"Great Vibes",cursive;
+  font-size:60px;
+  color:#d6336c;
+  margin-bottom:20px;
+  text-shadow:0 0 20px rgba(255,105,135,0.8);
+}
+
+/* ✉ FINAL LETTER */
+#finalLetter{
+  max-width:430px;
+  max-height:55vh;          /* limits height so it fits screen */
+  overflow-y:auto;          /* makes it scrollable */
+  background:rgba(255,255,255,0.95);
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 0 40px rgba(255,105,135,0.6);
+  font-family:"Great Vibes",cursive;
+  font-size:20px;
+  color:#6b2b3a;
+  line-height:1.6;
+  text-align:center;
+  opacity:0;
+  transition:opacity 3s ease;
+}
+
+/* ▶ NEXT BUTTON */
+#nextBtn{
+  margin-top:26px;
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d88;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(255,77,136,0.9);
+  opacity:0;
+  transform:translateY(20px);
+  transition:all 1s ease;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">Loading love… 💗</div>
+
+<div id="instructions">
+  <div class="instructionBox">
+    <h2>Ready for a game?</h2>
+    <p>Catch my hearts for a surprise at the end 💕</p>
+    <button class="startBtn" onclick="startGame()">Start</button>
+  </div>
+</div>
+
+<div id="score">Score: 0</div>
+<div id="miniMsg"></div>
+
+<div id="winScreen">
+  <h1>YOU WIN</h1>
+
+  <div id="finalLetter">
+Happy valentine's baby,<br><br>
+i love you the most, i love doing random stuff for you and making you smile i wanna shower you with all the love i have because it's all yours and ye valentine sirf sal me ek bar ata hai but you matter to me each and every day a single week is not enogh for me to express the amount of love i hold for you and humare liye toh roz valentine hai hum pyar zyada karte hai na, aap babu ho na mere (it's always cringe until it's your turn) and ek baar ye exams khatam ho jaye fhir bas mai aur aap. we'll do everything jo hum nahi kar paye is exam time me and im so sorry mai apse zyada bat nhi kr pati pdhai ke chakkar me but you know na that i love you so much, so much that words cannot describe. youre my comfort place, youre my hot plate of momo in chilling winters, youre my cold side of the pillow, youre the pink color of the sunset, you are everything that ive ever dreamed of and i love you in every possible language and font youre me, and im you, YOU ARE MY SOULMATE and I LOVE YOU TO THE MOON AND BACK.<br><br>
+love<br>
+-kucci kuu🧸💗💋
+  </div>
+
+<button id="nextBtn" onclick="location.href='future.html'">
+    Future Dreambook ✨
+</button>
+</div>
+
+<script>
+let scoreValue = 0;
+let heartsCaught = 0;
+let gameInterval;
+
+const loading = document.getElementById("loading");
+const instructions = document.getElementById("instructions");
+const scoreEl = document.getElementById("score");
+const miniMsg = document.getElementById("miniMsg");
+const winScreen = document.getElementById("winScreen");
+const finalLetter = document.getElementById("finalLetter");
+const nextBtn = document.getElementById("nextBtn");
+
+const messages = [
+"I loovee youu the mosstt my munchhkiinn💋💗",
+"I'd do any possible thing which exists to make you smile",
+"youre my whole fuckin multiverse",
+"its us un every universe",
+"forget butterflies i get the whole amazon in my stomach when i look at you",
+"God was really at my side when he sent you to me",
+"omg you jus won an intense makeout sesh😝🤙",
+"you were mine, you are mine,  you will always be mine.",
+"omg you reached this far (see you at the wedding my love)",
+"you are the LOVE OF MY FUCKIN LIFE"
+];
+
+setTimeout(()=>{
+  loading.style.display="none";
+  instructions.style.display="flex";
+},5000);
+
+function startGame(){
+  instructions.style.display="none";
+  scoreEl.style.display="block";
+  gameInterval = setInterval(createHeart, 800);
+}
+
+function updateScore(){
+  scoreEl.innerText = "Score: " + scoreValue;
+}
+
+function showMsg(text){
+  miniMsg.innerText = text;
+  miniMsg.style.opacity = 1;
+  setTimeout(()=> miniMsg.style.opacity = 0, 1500);
+}
+
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.className="heart";
+  heart.innerText="💗";
+  heart.style.left=Math.random()*90+"vw";
+  heart.style.animationDuration=(3+Math.random()*2)+"s";
+
+  heart.onclick=()=>{
+    heart.remove();
+    scoreValue += 10;
+    heartsCaught++;
+    updateScore();
+    showMsg(messages[heartsCaught-1]);
+    if(heartsCaught===10) endGame();
+  };
+
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+}
+
+function endGame(){
+  clearInterval(gameInterval);
+  scoreEl.style.display="none";
+  miniMsg.style.display="none";
+  winScreen.style.display="flex";
+
+  setTimeout(()=> finalLetter.style.opacity=1, 800);
+  setTimeout(()=>{
+    nextBtn.style.opacity=1;
+    nextBtn.style.transform="translateY(0)";
+  },3200);
+}
+</script>
+
+</body>
+</html>

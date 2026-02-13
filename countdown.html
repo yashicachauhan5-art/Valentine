@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You Since 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  background:radial-gradient(circle at top,#ffd6e8,#ffb3d1);
+  font-family:"Poppins",sans-serif;
+  overflow:hidden;
+  text-align:center;
+}
+
+/* floating glowing hearts */
+.heart{
+  position:absolute;
+  font-size:20px;
+  opacity:0.6;
+  animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(100vh) scale(0.8);}
+  to{transform:translateY(-10vh) scale(1.2);}
+}
+
+/* heading */
+.title{
+  font-family:"Great Vibes",cursive;
+  font-size:46px;
+  color:#ff2e75;
+  text-shadow:0 0 14px rgba(255,46,117,0.7);
+  margin-bottom:20px;
+}
+
+/* timer text */
+#timer{
+  font-size:28px;
+  color:#ffffff;
+  text-shadow:0 0 18px rgba(255,255,255,0.9);
+  line-height:1.6;
+  max-width:90%;
+}
+
+/* forever line */
+.forever{
+  margin-top:18px;
+  font-family:"Great Vibes",cursive;
+  font-size:34px;
+  color:#ff2e75;
+  text-shadow:0 0 12px rgba(255,46,117,0.7);
+}
+
+/* next button */
+.next{
+  margin-top:40px;
+  padding:14px 34px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(45deg,#ff4d88,#ff85a2);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 0 18px rgba(255,77,136,0.7);
+
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.6s;
+}
+
+.next.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.next:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 28px rgba(255,77,136,1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="title">I have loved you for… 💗</div>
+
+<div id="timer"></div>
+
+<div class="forever">…and it will never end.</div>
+
+<button class="next" id="nextBtn" onclick="location.href='cake.html'">
+Next 💗
+</button>
+
+<script>
+/* floating hearts background */
+for(let i=0;i<30;i++){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(4+Math.random()*4)+"s";
+  document.body.appendChild(h);
+}
+
+/* LOVE START DATE  
+   28 Nov 2024, 4:10 PM IST  */
+const startDate = new Date("2024-11-28T16:10:00+05:30");
+
+function updateTimer(){
+  const now = new Date();
+  let diff = now - startDate;
+
+  let seconds = Math.floor(diff / 1000) % 60;
+  let minutes = Math.floor(diff / (1000*60)) % 60;
+  let hours   = Math.floor(diff / (1000*60*60)) % 24;
+  let days    = Math.floor(diff / (1000*60*60*24));
+
+  document.getElementById("timer").innerHTML =
+    days + " days<br>" +
+    hours + " hours<br>" +
+    minutes + " minutes<br>" +
+    seconds + " seconds";
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+
+/* next button appears after 10 seconds */
+setTimeout(()=>{
+  document.getElementById("nextBtn").classList.add("show");
+},10000);
+</script>
+
+</body>
+</html>

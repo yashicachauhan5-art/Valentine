@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  height:100vh;
+  background:radial-gradient(circle at top,#ffd9e6,#ffb6cc);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  font-family:"Poppins",sans-serif;
+}
+
+/* floating dreamy particles */
+.particle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  opacity:0.6;
+  animation:float linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+/* 🌹 Bouquet rising + sway */
+.bouquet{
+  position:absolute;
+  bottom:-300px;
+  width:320px;
+  opacity:0;
+  filter:blur(6px);
+  animation:
+    rise 2.8s ease forwards,
+    sway 4s ease-in-out infinite 2.8s;
+}
+
+@keyframes rise{
+  to{bottom:80px;opacity:1;filter:blur(0);}
+}
+
+@keyframes sway{
+  0%,100%{transform:rotate(-1.5deg);}
+  50%{transform:rotate(1.5deg);}
+}
+
+/* 📜 Note */
+.note{
+  position:absolute;
+  bottom:260px;
+  width:240px;
+  background:rgba(255,255,255,0.9);
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 12px 40px rgba(255,105,135,0.35);
+  text-align:center;
+
+  transform:rotateX(-90deg);
+  transform-origin:bottom;
+  opacity:0;
+
+  animation:openNote 1.6s ease forwards;
+  animation-delay:2.6s;
+}
+
+@keyframes openNote{
+  to{transform:rotateX(0deg);opacity:1;}
+}
+
+.note h2{
+  font-family:"Great Vibes",cursive;
+  color:#d6336c;
+  font-size:32px;
+  margin-bottom:6px;
+}
+
+.note p{
+  color:#6b2b3a;
+  font-size:14px;
+}
+
+/* ✨ Sparkles */
+.sparkle{
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:radial-gradient(circle, #fff, #ffd6e7);
+  border-radius:50%;
+  opacity:0;
+  animation:spark 1.2s ease forwards;
+}
+
+@keyframes spark{
+  0%{transform:scale(0) translateY(0);opacity:1;}
+  100%{transform:scale(1.8) translateY(-40px);opacity:0;}
+}
+
+/* 💗 PRETTIER GLOW BUTTON (ONLY CHANGE) */
+.next{
+  position:absolute;
+  bottom:40px;
+  padding:14px 32px;
+  border:none;
+  border-radius:40px;
+
+  font-size:16px;
+  font-weight:500;
+  font-family:"Poppins",sans-serif;
+  letter-spacing:0.3px;
+
+  color:white;
+  cursor:pointer;
+
+  background:linear-gradient(135deg,#ff6fa3,#ff4d88,#ff7eb3);
+  background-size:200% 200%;
+
+  box-shadow:
+    0 0 18px rgba(255,77,136,0.6),
+    0 0 35px rgba(255,105,160,0.45);
+
+  transition:all 0.35s ease;
+
+  opacity:0;
+  transform:translateY(20px);
+  animation:
+    fadeBtn 1.5s ease forwards 4s,
+    glowMove 4s ease-in-out infinite 4s;
+}
+
+.next:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:
+    0 0 25px rgba(255,77,136,0.9),
+    0 0 50px rgba(255,105,160,0.7);
+}
+
+@keyframes glowMove{
+  0%,100%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+}
+
+@keyframes fadeBtn{
+  to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<script>
+/* floating particles */
+for(let i=0;i<30;i++){
+  let p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(6+Math.random()*4)+"s";
+  document.body.appendChild(p);
+}
+
+/* ✨ sparkle burst when note opens */
+setTimeout(()=>{
+  for(let i=0;i<12;i++){
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=(45+Math.random()*10)+"vw";
+    s.style.top=(40+Math.random()*10)+"vh";
+    s.style.animationDelay=(Math.random()*0.3)+"s";
+    document.body.appendChild(s);
+  }
+},2600);
+</script>
+
+<img src="bouquet.png" class="bouquet">
+
+<div class="note">
+  <h2>I love you the most</h2>
+  <p>You are my forever Valentine.</p>
+</div>
+
+<button class="next" onclick="location.href='14-reasons.html'">
+Wanna know why I love you so much?
+</button>
+
+</body>
+</html>
